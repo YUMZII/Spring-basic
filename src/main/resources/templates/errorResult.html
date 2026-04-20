@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    span{
+    color:red;
+    }
+</style>
+</head>
+<body>
+<h1>오류을 처리하는 동안 오류가 발생했어요..</h1>
+<h2> 오류의 원인: <span th:text="${errorMsg}"></span></h2>
+<a href="/calcFrom.html">입력화면</a>
+</body>
+</html>
