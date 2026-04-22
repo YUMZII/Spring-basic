@@ -1,4 +1,4 @@
-package com.example.springlab.controller;
+package com.example.springlab.domain;
 
 import lombok.Getter;
 import lombok.AllArgsConstructor;

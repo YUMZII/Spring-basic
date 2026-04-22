@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @font-face {
+            font-family: 'LotteMartHappiness';
+            src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff2') format('woff2'),
+            url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff') format('woff');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'LotteMartHappiness';
+            src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff2') format('woff2'),
+            url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff') format('woff');
+            font-weight: 700;
+            font-display: swap;
+        }
+        *{
+            font-family: 'LotteMartHappiness';
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>우리팀 소개</h1>
+<hr>
+<form th:action="@{/myTeam1}" method="get">
+<button type="submit" name="type" value="teamname">우리 팀명</button>
+<button type="submit" name="type" value="member">우리 팀원</button>
+</form>
+<!--우리팀명-->
+<div th:if="${myteam.teamName != null}">
+    <h2 th:text="${myteam.teamName}"></h2>
+</div>
+<!--우리팀원-->
+<div th:if="${myteam.teamMember != null}">
+    <p>팀의 팀원들을 소개합니다.</p>
+    <ul>
+        <li th:each="m : ${myteam.teamMember}">
+            <span th:text="${m.name}"></span>:
+            별명은 <span th:text="${m.nicName}"></span>이고,
+            좋아하는 음식은 <span th:text="${m.food}"></span> 입니다.
+        </li>
+    </ul>
+</div>
+</body>
+</html>
