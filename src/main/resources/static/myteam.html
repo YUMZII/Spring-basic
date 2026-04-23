@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @font-face {
+            font-family: 'LotteMartHappiness';
+            src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff2') format('woff2'),
+            url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff') format('woff');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'LotteMartHappiness';
+            src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff2') format('woff2'),
+            url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff') format('woff');
+            font-weight: 700;
+            font-display: swap;
+        }
+        *{
+            font-family: 'LotteMartHappiness';
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>우리팀 소개</h1>
+<hr>
+<button onclick="getTeamName()">우리 팀명</button>
+<button onclick="getTeamembers()">우리 팀원</button>
+<div id="result"></div>
+</form>
+<script>
+    <!--우리팀명-->
+    function getTeamName(){
+        fetch('/myTeam2')// 서버에 get요청, 페이지 이동 없음
+            //Controller2에서 myTeam2() 요청
+            .then(res => res.json()) // json으로 변환
+            .then(data => { document.getElementById('result').
+                innerHTML=`우리 팀의 팀명은 ${data.teamName}입니다.`;
+            });//data.teamName만 꺼내서 result div출력
+    }
+    <!--우리팀원-->
+    function getTeamembers(){
+        fetch('/myTeam2') //같은 서버 요청
+            .then(res =>res.json()) //json수신
+            .then(data => {
+                let html = `<p>${data.teamName}의 팀원을 소개합니다.<p><ul>`;
+                data.teamMember.forEach(list => { //data.teamName + data.members전체를 꺼내서
+                    html += `<li>${list.name}:별명은 ${list.nickName}이고 좋아하는 음식은 ${list.food}입니다.</li>`;
+                });//반복문으로 팀원 목록 만들어 #result div에 출력함
+                html += '</ul>';
+                document.getElementById('result').innerHTML=html;
+            });
+    }
+</script>
+</body>
+</html>
