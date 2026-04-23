@@ -9,6 +9,6 @@ import lombok.ToString;
 @Getter
 public class TeamMemberVO {
     private String name;
-    private String nicName;
+    private String nickName;
     private String food;
 }
