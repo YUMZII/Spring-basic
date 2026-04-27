@@ -11,8 +11,7 @@ import java.util.List;
 @RestController
 public class MyTeamController2 {
     @GetMapping("/myTeam2")
-    public TeamDTO myTeam2(){
-
+    public TeamDTO myTeam2(){// 필요한 것 만 가져오는 코드로 수정해줘
         List<TeamMemberVO> list = new ArrayList<>();
         list.add( new TeamMemberVO("이민호", "아버지", "육회"));
         list.add( new TeamMemberVO("우지연","우지","곱창"));
