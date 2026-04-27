@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>student 테이블 읽어오기</h1>
+<hr>
+<th:block th:if="${mode == 'name'}">
+    <ul>
+        <th:block th:each="student : ${list}">
+            <li>[[${student.name}]]</li>
+        </th:block>
+    </ul>
+</th:block>
+<th:block th:if="${mode == 'all'}">
+    <ul>
+        <th:block th:each="student : ${list}">
+            <li>[[${student.name}]]/[[${student.score}]]</li>
+        </th:block>
+    </ul>
+</th:block>
+<th:block th:if="${score}">
+    <h2>[[${ score }]]</h2>
+</th:block>
+<th:block th:if="${avg}">
+    [[${avg}]]
+</th:block>
+</body>
+</html>
