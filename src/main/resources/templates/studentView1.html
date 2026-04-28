@@ -7,6 +7,7 @@
 <body>
 <h1>student 테이블 읽어오기</h1>
 <hr>
+
 <th:block th:if="${mode == 'name'}">
     <ul>
         <th:block th:each="student : ${list}">
@@ -14,18 +15,51 @@
         </th:block>
     </ul>
 </th:block>
+
 <th:block th:if="${mode == 'all'}">
     <ul>
-        <th:block th:each="student : ${list}">
-            <li>[[${student.name}]]/[[${student.score}]]</li>
-        </th:block>
+        <table th:if="${list}">
+            <tr th:each="student : ${list}" th:if="${student != null}">
+                <td>[[${student.name }]]</td>
+                <td>[[${student.score }]]</td>
+                <td><a th:href="@{/delete(name=${student.name})}"> <img src="/images/delete.png" width="38"></a></td>
+            </tr>
+        </table>
     </ul>
 </th:block>
+
 <th:block th:if="${score}">
     <h2>[[${ score }]]</h2>
 </th:block>
+
 <th:block th:if="${avg}">
     [[${avg}]]
 </th:block>
+
+<a href="#" onclick="displayInsertForm(); return false;">학생정보입력</a>
+
+<div id="insertForm" style="display:none;">
+    <h2>학생 정보를 입력하세요</h2>
+    <hr>
+    <form method="post" action="/insert">
+        <input type="text" name="name"
+               placeholder="이름" required><br>
+        <input type="number" name="score"
+               min="0" max="100"
+               placeholder="점수" required><br>
+        <input type="submit" value="등록">
+    </form>
+</div>
+
+<script th:if="${alert1}">
+    alert('[[${alert1}]]');
+</script>
+
+<script>
+    function displayInsertForm() {
+        document.getElementById("insertForm").style.display = "block";
+    }
+</script>
+</div>
 </body>
 </html>
