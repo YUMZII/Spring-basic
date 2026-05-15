@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @font-face {
+            font-family: 'OngleipYoonwoo';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105@1.1/Yoonwoo.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'OngleipYoonwoo';
+            text-align: center;
+            margin: 0;
+            padding: 30px 0;
+        }
+
+        form {
+            margin: 0 auto;
+            padding: 40px 30px;
+            box-sizing: border-box;
+        }
+        ul {
+            list-style-position: inside;
+            padding: 0;
+            width: fit-content;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 22px;
+        }
+
+        img {
+            width : 200px;
+            border: 2px solid #333;
+            box-shadow:10px 10px 10px gray;
+            margin-top: 30px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<!-- 1. /product 요청시 → 인형 목록 화면 -->
+<div th:if="${basket == null}">
+    <h1>원하는 상품을 클릭해 주세요!! 마구마구^^</h1>
+    <hr>
+    <th:block th:each="i : ${#numbers.sequence(1, 10)}">
+        <a th:href="@{/basket(pid=${'p00' + i})}">
+            <img th:src="${'/images/' + i + '.jpg'}" width="100">
+        </a>
+    </th:block>
+</div>
+
+<!-- 2. /basket 요청시 + 상품 있을 때 → 장바구니 화면 -->
+<div th:if="${basket != null and !basket.isEmpty()}">
+    <h3>선택한 상품 리스트</h3>
+    <hr>
+    <ul>
+        <li th:each="item : ${basket}">
+            ● [[${item.key}]] 상품 [[${item.value}]]개
+        </li>
+    </ul>
+    <a href="/basket">상품비우기</a><br>
+    <a href="/product">상품선택하기</a>
+</div>
+
+<!-- 3. 상품비우기 클릭 후 → 선택한 상품 없을 때 -->
+<div th:if="${basket != null and basket.isEmpty()}">
+    <h3>선택한 상품이 없어요.</h3>
+    <a href="/product">상품선택하기</a>
+</div>
+</body>
+</html>
